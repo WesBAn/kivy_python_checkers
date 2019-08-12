@@ -191,9 +191,6 @@ class ChGame:
         Returns -1 - Game Canceled
         Returns 0 - Game ended clearly
         """
-        # m_answer = {'Y', 'N'}
-        # s_answer = {'N', 'S'}
-        # t_answer = {'--', *WHITE_START_POSITIONS, *BLACK_START_POSITIONS}
         self.logged_random_moves.clear()
         turn = 1
         while self.check_game_win() == 0 and not self.check_game_draw_3_1() and not self.check_game_draw_repeat():
@@ -293,8 +290,6 @@ class ChGame:
                         moves.append((checker.position, field))
                 else:                                                                        # 4)The enemy checker is
                     next_field = self.table_obj.next_on_dg(checker.position, field)
-                    # print('DEBUG NEXT_FIELD', next_field, sep=' = ')
-                    # print('DEBUG COLOR CHECKER', checker.color, sep=' = ')
                     if next_field == -1 or self.table_obj[next_field] != 0:   # 4.1) If next isn't free
                         continue
                     else:
@@ -365,7 +360,6 @@ class ChGame:
             return all_moves, must_eat_flag
         else:
             return None, must_eat_flag
-        # return all_moves, must_eat_flag if all_moves else (None, must_eat_flag)
 
 
 class ChChecker:
@@ -515,7 +509,6 @@ def main():
     i = input('Wanna play? Y/n')
     if i == 'Y':
         ChGame().play()
-
 
 
 if __name__ == "__main__":

@@ -24,12 +24,10 @@ class VChecker(Widget):
     move = ListProperty([None, None])
 
     def __init__(self, color, border_pos_list, game, queen=False, **kwargs):
-        # type(Widget).__init__(**kwargs) - for multiply
         self.turn_all[game.num] = 1
         self.border = border_pos_list
         self.num_of_game = game.num
         self.game_playing = game
-        # self.fd = self.parent.fd
         if kwargs.get("pos") is not None:
             pos = kwargs.pop('pos')
         else:
@@ -136,9 +134,6 @@ class MainGame(ChGame):
         self.end_move_flag = True
         self.all_moves = []
         self.must_eat_flag = False
-        # self.fd = os.pipe() # (r, w) descriptors
-        # self.opened_r_fd = ''
-        # self.opened_w_fd = ''
 
     def game_ended(self):
         self.turn = 2
@@ -179,9 +174,6 @@ class MainGame(ChGame):
         self.ml.checkers[checker.real_pos] = checker
 
     def animated_delete_checker(self, real_pos, duration=.6):
-        # print('OK MAIN POS', real_pos)
-        # for child in self.ml.checkers:
-        #     print(child)
         try:
             checker = self.ml.checkers.pop(real_pos)
         except KeyError:
@@ -202,11 +194,6 @@ class MainGame(ChGame):
         Returns -1 - Game Canceled
         Returns 0 - Game ended clearly
         """
-        # m_answer = {'Y', 'N'}
-        # s_answer = {'N', 'S'}
-        # t_answer = {'--', *WHITE_START_POSITIONS, *BLACK_START_POSITIONS}
-        # self.logged_random_moves.clear()
-        # while self.check_game_win() == 0 and not self.check_game_draw_3_1() and not self.check_game_draw_repeat():
         print("CHECKING YOUR MOVE ACTIVATED")
         if self.end_move_flag and self.last_res != 'N---':
             self.table_obj.table_print()
@@ -277,7 +264,6 @@ class MainGame(ChGame):
 # MainApp Class
 class MainApp(App):
     def changeScreenToMain(self, dt):
-        print('DT =', dt, sep='')
         self.sm.current = "main"
 
     def build(self):

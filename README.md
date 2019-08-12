@@ -1,2 +1,2 @@
-# kivy-python-checkers
-Simple checkers game, made with using Kivy GUI on Python 3. 
+# kivy_python_checkers
+Simple python3 + kivy app, realizing the checkers game

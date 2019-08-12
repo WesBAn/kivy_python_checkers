@@ -1,0 +1,142 @@
+# File name: main.py
+#:kivy 1.11.0
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<ScreenManagement>:
+    transition: FadeTransition()
+    WelcomeScreen:
+    MainScreen:
+    SettingsScreen:
+
+<WelcomeScreen>:
+    name: "welcome"
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+
+    Label:
+        text_size: root.size
+        halign: 'center'
+        valign: 'middle'
+        font_name: 'data/font/helvetica.ttf'
+        font_size: 40
+        color: [0, 0, 0, 1]
+        text: "Welcome!"
+
+<MainScreen>:
+    name: "main"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "data/back.png"
+#    MainLayout:
+
+
+<MainLayout>:
+    BoxLayout:
+        pos: root.pos
+        size_hint: 1,1
+        id: MainBox
+        orientation: "horizontal" if root.width >= root.height else "vertical"
+        spacing: -2
+        GridLayout:
+            id: TableSection
+            cols: 2
+            rows: 2
+            spacing: -2
+            size_hint: (.8, 1) if MainBox.orientation == 'horizontal' else (1, .8)
+            NumsRow:
+                id: Nums
+            Table:
+                id: MainTable
+            FloatLayout:
+                size_hint: (.04, .04)
+                Widget:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8, 0.8, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+            CharsRow:
+                id: Chars
+
+        BoxLayout:
+            id: ButtonsSection
+            orientation: "vertical"
+            size_hint: (.2, 1) if MainBox.orientation == 'horizontal' else (1, .2)
+            padding: 20
+            spacing: 30
+            NewGameButton:
+                on_release: app.game.run()
+            Button:
+                id: "draw_button"
+                size_hint: (1, .25)
+                background_color: 0.8, 0.8, 0.8, 1
+                background_normal: ""
+                text: "Ничья?"
+                color: 0, 0, 0, 1
+                bold: True
+            Button:
+                id: "settings_button"
+                size_hint: (1, .25)
+                background_color: 0.8, 0.8, 0.8, 1
+                background_normal: ""
+                text: "Настройки"
+                color: 0, 0, 0, 1
+                bold: True
+            Widget:
+
+
+<Table>:
+    spacing: -2
+    cols: 8
+    rows: 8
+    size_hint: (.96, .96)
+
+
+<SquareImage>:
+    size: root.size
+    pos: root.pos
+
+
+<NumsRow>:
+    canvas.before:
+        Color:
+            rgba: 0.8, 0.8, 0.8, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+    orientation: "vertical"
+    size_hint: (.04, .9)
+
+
+<CharsRow>:
+    canvas.before:
+        Color:
+            rgba: 0.8, 0.8, 0.8, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+    orientation: "horizontal"
+    size_hint: (.9, .04)
+
+<NewGameButton>:
+    id: "new_game_button"
+    size_hint: (1, .25)
+    background_color: 0.8, 0.8, 0.8, 1
+    background_normal: ""
+    text: "Новая игра"
+    color: 0, 0, 0, 1
+    bold: True
+
+<StateAlert>:
+    title: "Игра окончена"
+    size_hint: (None, None)
+    size: (500, 300)
+    auto_dismiss: False
+
